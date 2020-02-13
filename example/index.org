@@ -1,0 +1,5 @@
+* Hello World
+This is an example file.
+** The link
+Here is the [[file:topic.org][link to the topics file]].
+And [[file:categories/overview.org][this one]] leads into a sub directory.

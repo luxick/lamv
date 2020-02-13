@@ -1,0 +1,43 @@
+#+TITLE: lamv - Link Aware File Moving
+This program is used to move plaintext files around in a common directory while preserving links between them.
+* The Program
+** Configuration
+The whole premise is that all interlinked files reside under a single project root directory.
+This directory must be given to ~lamv~ for it to work.
+#+BEGIN_SRC sh
+  $ lamv --set-root-dir /home/luxick/Documents
+#+END_SRC
+This will set the ~/home/luxick/Documents~ Foolder as the ~lamv~ project root for all operations.
+Alternatively the directory chan be configured directly in the config file.
+** Functions
+The program should be usable from the command line. It should behave much like  ~mv~.
+*** File Renaming
+Some examples of how I want to use it:
+#+BEGIN_SRC sh
+  $ lamv example.org newname.org
+  Link detected in overview.org:
+  [[./subfolder/example.org][This is an example]] -> [[./subfolder/newname.org][This is an example]]
+#+END_SRC
+In this example, I want to rename the file ~example.org~ to ~newname.org~.
+The lamv program automatically scaned all org files within the project.
+It analyzes in what ways the link has changed and automatically rewrites all files, where my file is linked to.
+These changes are printed to the terminal with the exact change that the program made to the files.
+*** Detecting Broken Links
+Running ~lamv~ with a special parameter will cause it to scan all files in the project directory for links that lead nowhere.
+#+BEGIN_SRC sh
+  $ lamv --broken
+  2 broken links found in 2 files:
+  a.org
+  Line 12: [[test.org] [The test page]]
+  sub/test.org
+  Line 45: [[a.org] [Back to the start]]
+
+#+END_SRC
+In this example the file ~test.org~ was moved into a new subdirectory. ~lamv~ can find links in both files that now lead nowhere and make attempts to fix them.
+*** Fixing Broken Links
+There should be some kind of interactive mode for going through all broken links an fixing them.
+Preferably with some sort of educated guesses where file could be now.
+* Notes
+** Link Types
+Note that links between files should be relative.
+The related org-mode setting is ~(setq org-link-file-path-type 'relative)~

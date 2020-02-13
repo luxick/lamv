@@ -1,0 +1,3 @@
+* The Category Overview
+This is a link that goes [[file:~/Workspace/Sources/lmove/example/index.org][back up]] to the index file.
+And [[file:~/Workspace/Sources/lmove/example/project/Description.org][this one]] goes into a sibling directory.
